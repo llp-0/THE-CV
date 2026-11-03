@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: arabic-cv-assistant
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-flash-latest
+      - key: DAILY_LIMIT
+        value: "300"
+      # Skips the ~200MB Chromium download; the free plan cannot run it reliably.
+      # The site falls back to browser printing (Save as PDF).
+      - key: PUPPETEER_SKIP_DOWNLOAD
+        value: "true"
